@@ -63,3 +63,21 @@ ln -s $PWD/SublimeLinter.sublime-settings $SUBL_PATH/Packages/User/SublimeLinter
 zsh ~/.zshrc
 
 echo "👌  Carry on with git setup!"
+
+set -e
+
+copy() {
+  from="$PWD/copies/$1"
+  to="$2"
+  [[ ! $to ]] && to="$HOME/$1"
+
+  if [[ ! -f $to ]]; then
+    echo "-----> Creating $to"
+    mkdir -p "`dirname $to`"
+    cp $from $to
+  fi
+}
+
+# Copies
+copy .config/git/template/HEAD
+copy .zshlocal
